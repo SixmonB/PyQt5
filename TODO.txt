@@ -1,0 +1,118 @@
+Objectifs du TP
+===============
+
+Création d'un éditeur graphique avec les fonctionnalités de base pour réaliser 
+une IHM de création de graphiques avec des items sélectionnables et déplaçables.
+
+L'utilisateur de votre IHM doit permettre de :
+  - sélectionner différents types d'items graphiques à dessiner :
+       - OK lignes
+       - OK rectangles
+       - OK ellipses
+       - OK polygones
+       - OK textes)
+  - OK tracer, déplacer un item graphique ou un groupe d'items
+  - OK modifier les propriétes du stylo (OK couleur, OK épaisseur de trait, OK ligne solide,pointillée ...)
+  - OK modifier les propriétes de remplissage  (OK couleur, OK motif de remplissage,  ...)
+  - sauvegarder, charger un dessin à base d'objets graphiques déplaçables
+  - sauvegarder une image (png,jpg,...) du dessin
+
+Il faudra également :
+  - OK avoir accès à toutes les actions possibles sur l'IHM  dans la barre de menu
+  - OK représenter les actions les plus fréquentes  dans la barre d'outils.
+  - pouvoir sélectionner les actions possibles sur la zone cliente à l'aide d'un menu surgissant.
+  - que les actions puissent être activées par le clavier :
+     - Mnémonique + flèches + Entrée
+     - Ctrl + ... + touche clavier  
+  - avertir l'utilisateur en cas d'action irréversible à l'aide de boîtes de dialogues.
+  - OK mettre en place les actions Undo/Redo (touches Ctrl-Z/Ctrl-Y)
+
+Construction de l'IHM 
+=====================
+
+On mettra en place deux classes :
+   - MainWindow : fenêtre principale pour sélectionnesr les actions, héritage QMainWindow (main.py)
+   - Scene  :   zone cliente pour l'interaction, héritage QWidget (scene.py)
+
+Fenêtre principale (main.py)
+------------------
+
+La fenêtre principale servira à sélectionner les actions possibles sur la zone cliente.
+Il faudra donc créer les menus :
+
+File : New (Warning dialog)
+       ------------
+       OK Open
+       OK Save        (File selection dialog)
+       Save As
+       -----------
+       Exit (Question dialog)
+
+Tools : OK Line
+        OK Rectangle
+        OK Ellipse
+        OK Polygon
+        ----------
+        EN COURS text 
+OK Style : Pen (submenu)
+        OK  color  (Color selection  dialog)
+        OK  line   (submenu) (QPen : mode solidLine, DotLine, DotDashLine ...
+        OK  width  (submenu or dialog)
+        OK Brush (submenu)
+        OK  color  (Color selection  dialog)
+        OK  fill (submenu or dialog))(QBrush  : mode solidPattern VerticalPattern ...
+       Font (Font selection dialog)
+Help : OK About Us (Information dialog : Noms et Prenoms)
+       OK About Qt (Information dialog sur Qt/PyQt)
+       OK About the Application  (Information dialog : README)
+
+Il faudra également  proposer dans un menu surgissant (click droit sur la zone cliente)
+la sélection des caractéristiques de dessin (Tools,Style) afin de pouvoir les modifier
+sans sortir de la zone cliente : 
+
+Popup : OK Tools  (cf Tools de la barre d'actions )
+        OK Style  (cf Style de la barre d'actions )
+        ---------
+        OK Erase (Warning dialog)
+
+
+Interaction sur la zone cliente (scene.py)
+-------------------------------
+
+Tracé élastique : en cours de tracé, dessiner uniquement le contour de l'objet sans les caractéristiques de style associées (stylo)
+
+Tracé final  : on affiche l'objet graphique avec les  caractéristiques sélectionnés dans la fenêtre principale.
+
+Sélection et deplacement  : 
+  - OK d'un seul item graphique
+  - OK d'un groupe d'items graphiques
+
+OK Undo/redo : enlever le dernier objet tracé /recréer le dernier  objet tracé
+
+README.txt
+==========
+Documentation sur :
+  - l'installation
+  - l'utilisation de l'IHM lorsque ce n'est pas "intuitif"
+    - ex : aide sur le tracé de polygone (doubleclick pour le fermer ...)
+  - problèmes éventuels rencontrés lors du développement
+
+Ce README apparaîtra également dans le menu d'aide (About the Application)
+
+CONSIGNES
+=========
+En fin de chaque séance (17:30 au plus tard), creer une archive de version : 
+
+  - tar zcvf Dupond_Dupont_PyQt5.tgz Dupond_Dupont_PyQt5/
+
+Copier l'archive dans le repertoire de rendu de TP :
+
+  - cp Dupond_Dupont_PyQt5.tgz /home/TP/TPrendu/nedelec/CAI/PyQt5/.
+
+L'archive ne contiendra que le CODE SOURCE (*.py) et les données necessaire au projet :
+ 
+  - icons/*.png 
+  - Data/*.json 
+  - ....
+
+
